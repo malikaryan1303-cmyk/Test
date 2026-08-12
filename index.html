@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanvo Software Solutions</title>
+    
+    <!-- Importing Premium Google Fonts to match your images -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf9f6; /* Off-white premium background */
+            color: #2d3748;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        .cursive-text {
+            font-family: 'Great Vibes', cursive;
+            color: #c09c5d; /* Gold color */
+            font-size: 3rem;
+            font-weight: normal;
+            margin-bottom: -10px;
+        }
+
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+            color: #1a202c;
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        p.body-text {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Navbar Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: transparent;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #1a202c;
+            margin-bottom: -5px;
+        }
+
+        .logo h1 span {
+            color: #c09c5d; /* Gold dot */
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #718096;
+            text-transform: uppercase;
+        }
+
+        .menu-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 2px;
+            background: #1a202c;
+            position: relative;
+        }
+        .hamburger::before, .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            background: #1a202c;
+            left: 0;
+        }
+        .hamburger::before { top: -8px; }
+        .hamburger::after { top: 8px; }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* 16:9 Video Player Integration */
+        .video-wrapper {
+            margin: 40px auto;
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+            background-color: #fcfcfc;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            outline: none;
+            background-color: #e2e8f0;
+        }
+
+        /* Content Sections */
+        .content-section {
+            text-align: left;
+            margin: 50px 0;
+        }
+
+        .tech-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .sub-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        /* Blueprint Section */
+        .blueprint-section {
+            margin-top: 80px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .whatsapp-btn:hover {
+            background-color: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .heading-serif { font-size: 2.2rem; }
+            .cursive-text { font-size: 2.5rem; }
+            p.body-text { font-size: 1rem; text-align: center;}
+            header { padding: 15px 20px; }
+            .content-section { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="logo">
+            <h1>KANVO<span>.</span></h1>
+            <p>Software Solutions</p>
+        </div>
+        <div class="menu-btn">
+            <div class="hamburger"></div>
+            MENU
+        </div>
+    </header>
+
+    <!-- Main Content Flow -->
+    <div class="container">
+        
+        <!-- Hero Section (From Image 1) -->
+        <h2 class="cursive-text">Welcome to</h2>
+        <h2 class="cursive-text" style="margin-bottom: 20px;">Excellence</h2>
+        
+        <h1 class="heading-serif">Architecting Scalable Digital Ecosystems</h1>
+        
+        <p class="body-text" style="text-align: center;">
+            Kanvo Software Solutions delivers end-to-end full-stack applications, real-time database integrations, and high-converting storefronts built for absolute performance, bespoke aesthetics, and serverless backends delivering instant database propagation.
+        </p>
+
+        <!-- The 16:9 Bright Video Section added perfectly in flow -->
+        <div class="video-wrapper">
+            <video controls poster="https://via.placeholder.com/800x450.png?text=Video+Loading...">
+                <!-- Bhai yahan apni video ka exact naam daalna -->
+                <source src="1000003654.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Details & Features (From Image 2) -->
+        <div class="content-section">
+            <p class="body-text">
+                Critical for systems where delay is strictly unacceptable, seamlessly connecting global nodes.
+            </p>
+
+            <!-- Placeholder for the glowing circuit image -->
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop" alt="Circuit Board" class="tech-image">
+
+            <h2 class="sub-heading">Premium UI/UX Engineering</h2>
+            <p class="body-text">
+                Zero-bloat, performance-first interfaces handcrafted via raw modern CSS paradigms, eliminating heavy frameworks to ensure absolute fluidity.
+            </p>
+        </div>
+
+        <!-- Footer / Blueprint Section (From Image 3) -->
+        <div class="blueprint-section">
+            <h2 class="cursive-text">Let's Create</h2>
+            <h2 class="cursive-text" style="margin-bottom: 20px;">Together</h2>
+            
+            <h1 class="heading-serif">Project Blueprint</h1>
+            
+            <p class="body-text" style="text-align: center;">
+                Define your system architecture requirements below. Submitting details routes your specifications directly to our engineering team on WhatsApp.
+            </p>
+            
+            <!-- Clickable WhatsApp Button routing to the number in the image -->
+            <a href="https://wa.me/918708315572" target="_blank" class="whatsapp-btn">
+                Chat on WhatsApp (+91 8708315572)
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>
