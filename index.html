@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEDxYouth | Ghost Edition 2026</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts: Cormorant Garamond (Calligraphy) & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ted: '#EB0028',
+                        'ghost-dark': '#050505',
+                        'ghost-card': '#0D0D0E',
+                        'ghost-border': 'rgba(255, 255, 255, 0.08)',
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        calligraphy: ['"Cormorant Garamond"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #E5E7EB;
+            overflow-x: hidden;
+        }
+
+        /* Custom Ambient Background Glows */
+        .ghost-glow-1 {
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(235, 0, 40, 0.15) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ghost-glow-2 {
+            position: absolute;
+            top: 40%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(120, 0, 255, 0.08) 0%, rgba(5, 5, 5, 0) 70%);
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Advanced Glassmorphism */
+        .glass-panel {
+            background: rgba(18, 18, 20, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(235, 0, 40, 0.4);
+            box-shadow: 0 0 35px -5px rgba(235, 0, 40, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A1A1E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #EB0028;
+        }
+    </style>
+</head>
+<body class="relative antialiased selection:bg-ted selection:text-white">
+
+    <!-- Ambient Glow Effects -->
+    <div class="ghost-glow-1"></div>
+    <div class="ghost-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass-panel rounded-full px-6 py-3">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-1 text-2xl font-black tracking-tight">
+                <span class="text-ted">TEDx</span>
+                <span class="text-white font-light text-xl tracking-normal">Youth@City</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold uppercase tracking-widest text-gray-400">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#speakers" class="hover:text-white transition-colors">Speakers</a>
+                <a href="#schedule" class="hover:text-white transition-colors">Schedule</a>
+                <a href="#sponsors" class="hover:text-white transition-colors">Partners</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#register" class="bg-ted hover:bg-red-700 text-white text-xs uppercase tracking-widest font-bold px-6 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-red-900/30 hover:shadow-red-600/50">
+                    Get Passes
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-btn" class="md:hidden text-gray-300 focus:outline-none text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto mt-2 glass-panel rounded-2xl p-6 flex-col gap-4 text-center text-sm uppercase tracking-widest">
+            <a href="#about" class="py-2 hover:text-ted">About</a>
+            <a href="#speakers" class="py-2 hover:text-ted">Speakers</a>
+            <a href="#schedule" class="py-2 hover:text-ted">Schedule</a>
+            <a href="#sponsors" class="py-2 hover:text-ted">Partners</a>
+            <a href="#faq" class="py-2 hover:text-ted">FAQ</a>
+            <a href="#register" class="bg-ted text-white py-3 rounded-xl font-bold mt-2">Get Passes</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-6 text-center z-10">
+        <div class="max-w-5xl mx-auto">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel text-xs uppercase tracking-widest text-ted font-bold mb-8">
+                <span class="w-2 h-2 rounded-full bg-ted animate-ping"></span>
+                Annual Conference • November 24, 2026
+            </div>
+
+            <!-- Main Title with Calligraphy -->
+            <h1 class="text-6xl md:text-9xl font-black tracking-tight leading-none mb-6">
+                <span class="text-ted">TEDx</span>
+                <span class="font-calligraphy italic font-normal text-gray-200 lowercase block sm:inline">shadows & echoes</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="font-calligraphy italic text-2xl md:text-4xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed mb-12">
+                "In the quiet shadows of raw thought lie the loudest echoes that reshape our collective future."
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-4 gap-3 max-w-lg mx-auto mb-12" id="countdown">
+                <div class="glass-panel p-4 rounded-2xl">
+                    <span id="days" class="text-3xl md:text-4xl font-extrabold text-white block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500">Days</span>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl">
+                    <span id="hours" class="text-3xl md:text-4xl font-extrabold text-white block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500">Hours</span>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl">
+                    <span id="minutes" class="text-3xl md:text-4xl font-extrabold text-white block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500">Mins</span>
+                </div>
+                <div class="glass-panel p-4 rounded-2xl">
+                    <span id="seconds" class="text-3xl md:text-4xl font-extrabold text-white block">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500">Secs</span>
+                </div>
+            </div>
+
+            <!-- CTA Group -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                <a href="#register" class="w-full sm:w-auto bg-ted hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full text-xs uppercase tracking-widest transition-all duration-300 shadow-xl shadow-red-900/40">
+                    Reserve Seat
+                </a>
+                <a href="#about" class="w-full sm:w-auto glass-panel hover:bg-white/5 text-gray-300 font-semibold px-8 py-4 rounded-full text-xs uppercase tracking-widest transition-all">
+                    Explore Theme
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme / About Section -->
+    <section id="about" class="py-28 px-6 relative z-10 border-t border-ghost-border">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-ted font-bold block mb-3">The Concept</span>
+                <h2 class="text-4xl md:text-6xl font-calligraphy italic font-bold mb-6 text-white leading-tight">
+                    Beyond the visible surface of ideas.
+                </h2>
+                <p class="text-gray-400 leading-relaxed font-light mb-6 text-base md:text-lg">
+                    TEDx 2026 brings together thinkers, innovators, and creators who dare to look into the unseen. We explore how hidden shifts in technology, ethics, and human consciousness produce monumental cultural echoes.
+                </p>
+                <div class="grid grid-cols-2 gap-6 pt-4 border-t border-ghost-border">
+                    <div>
+                        <h4 class="text-3xl font-extrabold text-white">12+</h4>
+                        <p class="text-xs uppercase tracking-wider text-gray-500 mt-1">Visionary Talks</p>
+                    </div>
+                    <div>
+                        <h4 class="text-3xl font-extrabold text-white">1000+</h4>
+                        <p class="text-xs uppercase tracking-wider text-gray-500 mt-1">Attendees</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ghost Style Image Container -->
+            <div class="relative">
+                <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-ted to-purple-600 opacity-20 blur-xl"></div>
+                <div class="relative glass-panel rounded-3xl p-3 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80" alt="TEDx Stage" class="rounded-2xl w-full h-[400px] object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers Section -->
+    <section id="speakers" class="py-28 px-6 relative z-10 bg-ghost-card/30 border-t border-ghost-border">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-20">
+                <span class="text-xs uppercase tracking-[0.3em] text-ted font-bold block mb-3">Lineup</span>
+                <h2 class="text-4xl md:text-6xl font-calligraphy italic font-bold text-white">Keynote Speakers</h2>
+                <p class="text-gray-400 text-sm mt-3">Icons and disruptors sharing ideas worth spreading.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Speaker Card 1 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl overflow-hidden transition-all duration-500 group">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Speaker" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-ghost-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8 relative -mt-12">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-ted bg-ted/10 border border-ted/20 px-3 py-1 rounded-full">AI Ethics</span>
+                        <h3 class="text-2xl font-bold text-white mt-4">Dr. Evelyn Vance</h3>
+                        <p class="font-calligraphy italic text-gray-400 text-lg">Quantum Consciousness</p>
+                    </div>
+                </div>
+
+                <!-- Speaker Card 2 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl overflow-hidden transition-all duration-500 group">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Speaker" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-ghost-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8 relative -mt-12">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-ted bg-ted/10 border border-ted/20 px-3 py-1 rounded-full">Future Architecture</span>
+                        <h3 class="text-2xl font-bold text-white mt-4">Marcus Thorne</h3>
+                        <p class="font-calligraphy italic text-gray-400 text-lg">Sub-zero Living Spaces</p>
+                    </div>
+                </div>
+
+                <!-- Speaker Card 3 -->
+                <div class="glass-panel glass-panel-hover rounded-3xl overflow-hidden transition-all duration-500 group">
+                    <div class="relative h-96 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Speaker" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-ghost-card via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-8 relative -mt-12">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-ted bg-ted/10 border border-ted/20 px-3 py-1 rounded-full">Bio-Genetics</span>
+                        <h3 class="text-2xl font-bold text-white mt-4">Aria Tanaka</h3>
+                        <p class="font-calligraphy italic text-gray-400 text-lg">Editing Human Aging</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Schedule Section -->
+    <section id="schedule" class="py-28 px-6 relative z-10 border-t border-ghost-border">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-ted font-bold block mb-3">Timeline</span>
+                <h2 class="text-4xl md:text-5xl font-calligraphy italic font-bold text-white">Event Schedule</h2>
+            </div>
+
+            <!-- Schedule Items Container -->
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-mono text-ted font-bold w-20">09:00 AM</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Registrations & Coffee Networking</h4>
+                            <p class="text-xs text-gray-500">Main Atrium • Welcome Kits</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest bg-white/5 px-4 py-1.5 rounded-full w-fit">Entry</span>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-mono text-ted font-bold w-20">10:30 AM</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Opening Keynote: Shadows of Tomorrow</h4>
+                            <p class="text-xs text-gray-500">Main Stage • Dr. Evelyn Vance</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-ted uppercase tracking-widest bg-ted/10 border border-ted/20 px-4 py-1.5 rounded-full w-fit">Session 1</span>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-mono text-ted font-bold w-20">01:00 PM</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Catered Lunch & Interactive Exhibits</h4>
+                            <p class="text-xs text-gray-500">Garden Courtyard • VR Installations</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-gray-400 uppercase tracking-widest bg-white/5 px-4 py-1.5 rounded-full w-fit">Break</span>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="glass-panel p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition">
+                    <div class="flex items-center gap-6">
+                        <span class="text-sm font-mono text-ted font-bold w-20">02:30 PM</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Session 2: Bio-Genetics & Future Habitat</h4>
+                            <p class="text-xs text-gray-500">Main Stage • Panel Discussion</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-ted uppercase tracking-widest bg-ted/10 border border-ted/20 px-4 py-1.5 rounded-full w-fit">Session 2</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration / Passes Section -->
+    <section id="register" class="py-28 px-6 relative z-10 bg-ghost-card/50 border-t border-ghost-border">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-ted font-bold block mb-3">Reserve</span>
+                <h2 class="text-4xl md:text-5xl font-calligraphy italic font-bold text-white">Choose Your Pass</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Standard Pass -->
+                <div class="glass-panel p-8 rounded-3xl flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-bold">Attendee</span>
+                        <h3 class="text-3xl font-extrabold text-white mt-2">Standard Pass</h3>
+                        <p class="text-4xl font-black text-ted mt-4">$49 <span class="text-xs text-gray-500 font-normal">/ person</span></p>
+                        <ul class="mt-8 space-y-4 text-sm text-gray-400">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Full Access to all Talks</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Official TEDx Attendee Kit</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Networking Lunch</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('Standard Pass')" class="mt-8 w-full bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-widest transition">
+                        Select Standard
+                    </button>
+                </div>
+
+                <!-- VIP Pass -->
+                <div class="glass-panel p-8 rounded-3xl flex flex-col justify-between border-ted/40 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 bg-ted text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        VIP Experience
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-ted font-bold">Patron</span>
+                        <h3 class="text-3xl font-extrabold text-white mt-2">Patron Pass</h3>
+                        <p class="text-4xl font-black text-ted mt-4">$129 <span class="text-xs text-gray-500 font-normal">/ person</span></p>
+                        <ul class="mt-8 space-y-4 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Front-row Priority Seating</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Speaker Lounge & Dinner Access</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-ted"></i> Exclusive Deluxe Merchandise</li>
+                        </ul>
+                    </div>
+                    <button onclick="openModal('Patron VIP Pass')" class="mt-8 w-full bg-ted hover:bg-red-700 text-white font-bold py-3.5 rounded-2xl text-xs uppercase tracking-widest transition shadow-lg shadow-red-900/30">
+                        Select VIP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-28 px-6 relative z-10 border-t border-ghost-border">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-ted font-bold block mb-3">Questions</span>
+                <h2 class="text-4xl font-calligraphy italic font-bold text-white">Frequently Asked</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="glass-panel rounded-2xl overflow-hidden">
+                    <button class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg faq-toggle">
+                        What is included in the ticket price?
+                        <i class="fa-solid fa-chevron-down text-ted text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-6 text-sm text-gray-400 hidden font-light leading-relaxed">
+                        Your pass includes admission to all speaker talks, lunch and coffee breaks, as well as the official attendee gift bag.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-panel rounded-2xl overflow-hidden">
+                    <button class="w-full p-6 text-left flex justify-between items-center text-white font-bold text-lg faq-toggle">
+                        Can I transfer my ticket to someone else?
+                        <i class="fa-solid fa-chevron-down text-ted text-sm transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-6 pb-6 text-sm text-gray-400 hidden font-light leading-relaxed">
+                        Yes, ticket transfers are allowed up to 72 hours before the event date via your registration email link.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-ghost-border py-16 px-6 relative z-10 text-center text-gray-500 text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col items-center gap-6">
+            <div class="text-2xl font-black">
+                <span class="text-ted">TEDx</span><span class="text-white font-light">Youth</span>
+            </div>
+            <p class="max-w-md font-light text-gray-400">This independent TEDx event is operated under license from TED Conferences LLC.</p>
+            <div class="flex gap-6 text-base text-gray-400">
+                <a href="#" class="hover:text-ted"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-ted"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-ted"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p>© 2026 TEDx Event. Designed for Modern Excellence.</p>
+        </div>
+    </footer>
+
+    <!-- Ticket Registration Modal -->
+    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-8 relative border-ted/30">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-2" id="modal-pass-title">Get Ticket</h3>
+            <p class="text-xs text-gray-400 mb-6">Fill in your details to reserve your seat.</p>
+
+            <form onsubmit="event.preventDefault(); alert('Seat Reserved Successfully!'); closeModal();" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 mb-1">Full Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full bg-white/5 border border-ghost-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-ted">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-400 mb-1">Email Address</label>
+                    <input type="email" required placeholder="john@example.com" class="w-full bg-white/5 border border-ghost-border rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-ted">
+                </div>
+                <button type="submit" class="w-full bg-ted hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest transition mt-4">
+                    Confirm Registration
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vanilla JavaScript for Functionality -->
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // FAQ Accordion Toggle
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Event Countdown Timer
+        const eventDate = new Date('November 24, 2026 09:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
+        }, 1000);
+
+        // Modal Controls
+        function openModal(passName) {
+            document.getElementById('modal-pass-title').innerText = 'Reserve ' + passName;
+            document.getElementById('modal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
