@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Darpan | The No. 1 Institute</title>
+    
+    <!-- Premium Fonts: Great Vibes for Calligraphy, Cinzel for Royal Headings, Poppins for clean text -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           1. CSS VARIABLES & BASE RESET
+           ========================================== */
+        :root {
+            --primary-gold: #d4af37;
+            --secondary-gold: #f9d976;
+            --dark-gold: #aa8115;
+            --bg-deep: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --glass-border: rgba(212, 175, 55, 0.2);
+            --glow-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            overflow-x: hidden;
+            /* Ultra-detailed Calligraphy Paper Texture Overlay */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.02), transparent 25%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* Custom Scrollbar for a polished look */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; border-left: 1px solid #222; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(to bottom, var(--dark-gold), var(--primary-gold)); 
+            border-radius: 10px; 
+            border: 3px solid #0a0a0a;
+        }
+
+        ::selection {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        /* ==========================================
+           2. FLOATING PARTICLES & ANIMATIONS
+           ========================================== */
+        .particle-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-gold) 0%, transparent 70%);
+            opacity: 0.2;
+            filter: blur(8px);
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+            50% { text-shadow: 0 0 30px rgba(212,175,55,0.8), 0 0 10px #fff; }
+            100% { text-shadow: 0 0 10px rgba(212,175,55,0.4); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           3. PREMIUM NAVIGATION
+           ========================================== */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5vw;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .nav-logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo-text span {
+            color: var(--primary-gold);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            margin-left: 5px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 35px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--primary-gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ==========================================
+           4. HERO SECTION
+           ========================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 120px 20px 50px;
+            background: radial-gradient(circle at center, rgba(212,175,55,0.05) 0%, transparent 60%);
+        }
+
+        .hindi-motto {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--secondary-gold), var(--primary-gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            animation: pulseGlow 4s infinite;
+        }
+
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        /* ==========================================
+           5. LEADERSHIP SECTION
+           ========================================== */
+        .section-container {
+            padding: 100px 5vw;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .section-header p {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: var(--text-muted);
+        }
+
+        .leadership-grid {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .leader-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            width: 350px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: var(--glow-shadow);
+        }
+
+        .leader-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            margin: 0 auto 20px;
+            object-fit: cover;
+            padding: 5px;
+        }
+
+        .leader-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .leader-card p {
+            color: var(--primary-gold);
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .leader-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: none;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           6. COURSES (SYLLABUS) SECTION
+           ========================================== */
+        .courses-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media(max-width: 768px) { .courses-wrapper { grid-template-columns: 1fr; } }
+
+        .course-box {
+            background: linear-gradient(145deg, rgba(20,20,20,0.8), rgba(10,10,10,0.9));
+            border: 1px solid rgba(255,255,255,0.05);
+            border-top: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .course-box h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--primary-gold);
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+            padding-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-list {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-list li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .course-list li:hover {
+            transform: translateX(10px);
+            color: var(--primary-gold);
+        }
+
+        .course-list li::before {
+            content: '\f5a1'; /* FontAwesome Book Reader Icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0; top: 2px;
+            color: var(--primary-gold);
+            font-size: 1rem;
+        }
+
+        /* ==========================================
+           7. WALL OF FAME (MASSIVE STUDENT GRID)
+           ========================================== */
+        .fame-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .student-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .student-card:hover {
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 15px rgba(212,175,55,0.3);
+            z-index: 2;
+        }
+
+        .student-img-wrapper {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+        }
+
+        .student-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .student-card:hover .student-img-wrapper img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(120%);
+        }
+
+        .student-img-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to top, rgba(15,15,15,1), transparent);
+        }
+
+        .student-info {
+            padding: 20px 15px;
+            position: relative;
+            transform: translateZ(30px); /* 3D effect text pop */
+        }
+
+        .student-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .student-post {
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: rgba(212,175,55,0.1);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+
+        .student-dept {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           8. CONTACT & FOOTER
+           ========================================== */
+        .contact-section {
+            background: linear-gradient(to top, #000, transparent);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 5vw 40px;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            color: var(--primary-gold);
+            transition: all 0.4s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            background: var(--primary-gold);
+            color: #000;
+            box-shadow: 0 0 20px rgba(212,175,55,0.5);
+            transform: translateY(-5px);
+        }
+
+        .contact-text h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-tagline {
+            font-size: 0.85rem;
+            color: #666;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic JavaScript Particle Generator -->
+    <div class="particle-container" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <div class="nav-logo-text">SD <span>Selection Darpan</span></div>
+        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#leadership">Leadership</a>
+            <a href="#courses">Syllabus</a>
+            <a href="#selections">Wall of Fame</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero reveal" id="home">
+        <h2 class="hindi-motto">"सपनों की कोई कीमत नहीं होती"</h2>
+        <h1 class="hero-title">SELECTION DARPAN</h1>
+        <p class="hero-subtitle">Your Dreams • Our Guidance</p>
+        <p style="color: #aaa; max-width: 600px; font-size: 1.1rem; line-height: 1.8; margin-top: 20px;">
+            The No. 1 Institute for Competitive Exams in Hisar. We forge the future of ambitious aspirants through unparalleled dedication, structured pedagogy, and a legacy of absolute success.
+        </p>
+    </section>
+
+    <!-- Leadership Section -->
+    <section class="section-container" id="leadership">
+        <div class="section-header reveal">
+            <h2>The Visionaries</h2>
+            <p>Guiding the path to excellence</p>
+        </div>
+        <div class="leadership-grid">
+            <!-- Co-Founder -->
+            <div class="leader-card reveal" data-tilt>
+                <!-- Using Picsum seeds to guarantee stable high-quality portrait placeholders -->
+                <img src="https://picsum.photos/seed/sandeep/200/200" alt="Sandeep Deswal Sir" class="leader-img">
+                <h3>Sandeep Deswal Sir</h3>
+                <p>Co-Founder</p>
+                <div class="leader-desc">Architecting the foundation of competitive success and strategic learning methodologies for all aspirants.</div>
+            </div>
+            <!-- Director -->
+            <div class="leader-card reveal" data-tilt>
+                <img src="https://picsum.photos/seed/vinod/200/200" alt="Dr. Vinod Sir" class="leader-img">
+                <h3>Dr. Vinod Sir</h3>
+                <p>Director</p>
+                <div class="leader-desc">(International Education Awardee) Leading with innovation, pedagogical excellence, and an unwavering commitment to student selection.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Syllabus Section -->
+    <section class="section-container" id="courses" style="background: rgba(10,10,10,0.5);">
+        <div class="section-header reveal">
+            <h2>Structured Syllabus</h2>
+            <p>Targeted batches for ultimate results</p>
+        </div>
+        <div class="courses-wrapper">
+            <!-- SSC Card -->
+            <div class="course-box reveal">
+                <h3><i class="fa-solid fa-landmark"></i> SSC Courses</h3>
+                <ul class="course-list">
+                    <li><strong>SSC CGL</strong> (Combined Graduate Level)</li>
+                    <li><strong>SSC CHSL</strong> (Combined Higher Sec. Level)</li>
+                    <li><strong>SSC MTS</strong> (Multi-Tasking Staff)</li>
+                    <li><strong>SSC GD Constable</strong> (General Duty)</li>
+                    <li><strong>SSC CPO</strong> (Central Police Organization)</li>
+                    <li><strong>Delhi Police</strong> (Constable & Head Constable)</li>
+                </ul>
+            </div>
+            <!-- HSSC Card -->
+            <div class="course-box reveal" style="animation-delay: 0.2s;">
+                <h3><i class="fa-solid fa-map"></i> HSSC Courses</h3>
+                <ul class="course-list">
+                    <li><strong>Haryana Police</strong> (Constable & SI)</li>
+                    <li><strong>Haryana Group D</strong> (Foundation & Target)</li>
+                    <li><strong>Haryana CET Pre</strong> (Common Eligibility Test)</li>
+                    <li><strong>Haryana CET Mains</strong> (Group C Specialization)</li>
+                    <li><strong>State Administrative Exams</strong> (Gram Sachiv, Patwari)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wall of Fame Section (The Detailed Images Code) -->
+    <section class="section-container" id="selections">
+        <div class="section-header reveal">
+            <h2>Wall of Fame</h2>
+            <p>Our pride, their hard work</p>
+        </div>
+        
+        <!-- Massive Grid of Students with dynamically seeded reliable image placeholders -->
+        <div class="fame-grid">
+            
+            <!-- Category: Customs & Excise -->
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/garvit/300/350" alt="Garvit"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Garvit</h4>
+                    <span class="student-post">Excise Inspector</span>
+                    <div class="student-dept">Customs & Excise</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/vishal/300/350" alt="Vishal Rathi"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Vishal Rathi</h4>
+                    <span class="student-post">Custom Inspector</span>
+                    <div class="student-dept">Customs & Excise</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/sumit/300/350" alt="Sumit"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Sumit</h4>
+                    <span class="student-post">Excise Inspector</span>
+                    <div class="student-dept">Customs & Excise</div>
+                </div>
+            </div>
+
+            <!-- Category: Ministry of Defence / Central Govt -->
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/vishesh/300/350" alt="Vishesh Grewal"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Vishesh Grewal</h4>
+                    <span class="student-post">JSA</span>
+                    <div class="student-dept">Ministry of Defence</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/manan/300/350" alt="Manan"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Manan</h4>
+                    <span class="student-post">ASO</span>
+                    <div class="student-dept">MOPNG</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/takdeer/300/350" alt="Takdeer Hooda"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Takdeer Hooda</h4>
+                    <span class="student-post">ASO</span>
+                    <div class="student-dept">Ministry of Defence</div>
+                </div>
+            </div>
+
+            <!-- Category: Police Forces -->
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/abhishek/300/350" alt="Abhishek"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Abhishek</h4>
+                    <span class="student-post">Sub Inspector</span>
+                    <div class="student-dept">Police Forces</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/yogesh/300/350" alt="Yogesh Dhankhar"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Yogesh Dhankhar</h4>
+                    <span class="student-post">Constable</span>
+                    <div class="student-dept">Haryana Police</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/niteshp/300/350" alt="Nitesh"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Nitesh</h4>
+                    <span class="student-post">Constable</span>
+                    <div class="student-dept">Delhi Police</div>
+                </div>
+            </div>
+
+            <!-- Category: Railways & Admin -->
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/narsingh/300/350" alt="Narsingh Rawat"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Narsingh Rawat</h4>
+                    <span class="student-post">Technician</span>
+                    <div class="student-dept">RRB (Railways)</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/mukesh/300/350" alt="Mukesh Gujjar"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Mukesh Gujjar</h4>
+                    <span class="student-post">ALP</span>
+                    <div class="student-dept">RRB (Railways)</div>
+                </div>
+            </div>
+            <div class="student-card reveal" data-tilt>
+                <div class="student-img-wrapper"><img src="https://picsum.photos/seed/saching/300/350" alt="Sachin"></div>
+                <div class="student-info">
+                    <h4 class="student-name">Sachin</h4>
+                    <span class="student-post">Gram Sachiv</span>
+                    <div class="student-dept">State Administration</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section class="contact-section reveal" id="contact">
+        <div class="contact-grid">
+            
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="contact-text">
+                    <h4>Visit Us</h4>
+                    <p>SCO No. 3, Red Square<br>Hisar, Haryana</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div class="contact-text">
+                    <h4>Instagram</h4>
+                    <p>@selectiondarpan_hisar</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
+                <div class="contact-text">
+                    <h4>Telegram</h4>
+                    <p>Selection Darpan Hisar</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fa-regular fa-envelope"></i></div>
+                <div class="contact-text">
+                    <h4>Email</h4>
+                    <p>selectiondarpan@gmail.com</p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <span class="footer-logo">Selection Darpan</span>
+            <p class="footer-tagline">"सपनों की कोई कीमत नहीं होती" &copy; 2026</p>
+        </footer>
+    </section>
+
+    <!-- Advanced JavaScript for Particles, Scroll Reveal, and 3D Card Hover Simulation -->
+    <script>
+        // 1. Generate Floating Particles dynamically for background depth
+        const particleContainer = document.getElementById('particles');
+        const particleCount = 25;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomize size, position, and animation duration
+            const size = Math.random() * 80 + 20 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.left = Math.random() * 100 + 'vw';
+            
+            const duration = Math.random() * 15 + 10 + 's';
+            const delay = Math.random() * -20 + 's';
+            particle.style.animationDuration = duration;
+            particle.style.animationDelay = delay;
+            
+            particleContainer.appendChild(particle);
+        }
+
+        // 2. Intersection Observer for buttery smooth scroll reveals
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('active');
+                // Optional: Stop observing once revealed
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => revealOnScroll.observe(el));
+
+        // 3. Vanilla JS 3D Tilt Effect for premium interactive feel on cards
+        const tiltCards = document.querySelectorAll('[data-tilt]');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element.
+                const y = e.clientY - rect.top;  // y position within the element.
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            });
+            
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none'; // Remove transition during hover for instant response
+            });
+        });
+    </script>
+</body>
+</html>
