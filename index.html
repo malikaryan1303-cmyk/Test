@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selection Darpan | Premier Coaching Institute Hisar</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           1. CORE VARIABLES & MOBILE-FIRST RESET
+           ========================================== */
+        :root {
+            --navy-blue: #0a192f;
+            --navy-light: #172a45;
+            --gold-accent: #d4af37;
+            --gold-hover: #b89528;
+            --gold-light: #fef9e7;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 4px 12px rgba(10, 25, 47, 0.05);
+            --shadow-md: 0 8px 20px rgba(10, 25, 47, 0.08);
+            --shadow-hover: 0 12px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            background: #e2e8f0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%2394a3b8' d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E") center no-repeat;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 4px; }
+
+        .reveal {
+            opacity: 0; transform: translateY(25px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ==========================================
+           2. PRELOADER ANIMATION
+           ========================================== */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loader-logo-box {
+            width: 110px; height: 110px; border-radius: 50%;
+            padding: 4px; border: 2px solid var(--gold-accent);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            margin-bottom: 15px; animation: pulse 1.8s infinite;
+        }
+        .loader-logo-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .loader-text {
+            font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--navy-blue);
+            letter-spacing: 2px; font-weight: 700; text-align: center;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.96); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* ==========================================
+           3. NAVBAR
+           ========================================== */
+        nav {
+            position: fixed; top: 0; width: 100%; height: 65px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 4vw; background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px); border-bottom: 2px solid var(--gold-accent);
+            z-index: 1000; box-shadow: var(--shadow-sm);
+        }
+
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px; text-decoration: none;
+        }
+
+        .nav-logo-container {
+            width: 48px; height: 48px; border-radius: 50%;
+            border: 2px solid var(--gold-accent); overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .nav-logo-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .nav-logo-text {
+            font-family: 'Cinzel', serif; font-size: 1.15rem; font-weight: 800;
+            color: var(--navy-blue); letter-spacing: 0.5px;
+        }
+
+        .nav-links { display: flex; gap: 16px; transition: 0.3s ease; align-items: center; }
+        .nav-links a {
+            color: var(--navy-blue); text-decoration: none; font-size: 0.78rem;
+            text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
+            position: relative; padding: 4px 0;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0%; height: 2px;
+            bottom: 0; left: 0; background: var(--gold-accent); transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta-btn {
+            background: var(--navy-blue) !important; color: var(--gold-accent) !important;
+            padding: 6px 14px !important; border-radius: 4px; border: 1px solid var(--gold-accent);
+            transition: 0.3s;
+        }
+        .nav-cta-btn:hover { background: var(--gold-accent) !important; color: var(--navy-blue) !important; }
+
+        .mobile-menu-btn {
+            display: none; font-size: 1.4rem; color: var(--navy-blue);
+            cursor: pointer; background: none; border: none; padding: 5px;
+        }
+
+        @media (max-width: 980px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                position: absolute; top: 65px; right: -100%; flex-direction: column;
+                background: #ffffff; width: 240px; padding: 20px; gap: 15px;
+                border-left: 2px solid var(--gold-accent); border-bottom: 2px solid var(--gold-accent);
+                box-shadow: -5px 10px 20px rgba(0,0,0,0.1); border-bottom-left-radius: 12px;
+                align-items: flex-start;
+            }
+            .nav-links.active { right: 0; }
+        }
+
+        /* ==========================================
+           4. HERO SECTION WITH STATS
+           ========================================== */
+        .hero {
+            padding: 110px 4vw 40px; text-align: center;
+            background: radial-gradient(circle at top, var(--gold-light) 0%, var(--bg-light) 75%);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-logo-badge {
+            width: 85px; height: 85px; margin: 0 auto 12px; border-radius: 50%;
+            border: 3px solid var(--gold-accent); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            overflow: hidden;
+        }
+        .hero-logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+        .hindi-motto {
+            font-size: 1.3rem; color: var(--gold-accent); margin-bottom: 6px; font-weight: 600; letter-spacing: 1px;
+        }
+        .hero-title {
+            font-family: 'Cinzel', serif; font-size: 2.6rem; font-weight: 800; color: var(--navy-blue);
+            line-height: 1.15; margin-bottom: 8px;
+        }
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold-accent); margin-bottom: 15px;
+        }
+        .hero-desc {
+            max-width: 800px; margin: 0 auto 25px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;
+        }
+        .hero-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 35px; }
+        .btn-primary {
+            background: var(--navy-blue); color: #fff; padding: 10px 24px; border-radius: 6px;
+            text-decoration: none; font-weight: 600; font-size: 0.85rem; border: 2px solid var(--navy-blue); transition: 0.3s;
+        }
+        .btn-primary:hover { background: transparent; color: var(--navy-blue); }
+        .btn-secondary {
+            background: transparent; color: var(--navy-blue); padding: 10px 24px; border-radius: 6px;
+            text-decoration: none; font-weight: 600; font-size: 0.85rem; border: 2px solid var(--gold-accent); transition: 0.3s;
+        }
+        .btn-secondary:hover { background: var(--gold-accent); }
+
+        .stats-strip {
+            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+            max-width: 1000px; margin: 0 auto; padding: 20px;
+            background: #ffffff; border-radius: 12px; border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-item { text-align: center; min-width: 140px; }
+        .stat-number { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 800; color: var(--navy-blue); }
+        .stat-label { font-size: 0.78rem; color: var(--gold-accent); font-weight: 600; text-transform: uppercase; }
+
+        /* ==========================================
+           5. SECTION HEADERS
+           ========================================== */
+        .section-header { text-align: center; margin-bottom: 35px; }
+        .section-header h2 {
+            font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--navy-blue);
+            position: relative; display: inline-block; padding-bottom: 6px; font-weight: 700;
+        }
+        .section-header h2::after {
+            content: ''; position: absolute; bottom: 0; left: 30%; width: 40%;
+            height: 2px; background: var(--gold-accent);
+        }
+        .section-header p {
+            font-family: 'Great Vibes', cursive; font-size: 1.6rem; color: var(--gold-accent); margin-top: 2px;
+        }
+
+        /* ==========================================
+           6. ABOUT & FACILITIES
+           ========================================== */
+        .about-section { padding: 50px 4vw; background: #ffffff; }
+        .about-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px; max-width: 1200px; margin: 0 auto;
+        }
+        .about-card {
+            background: var(--bg-light); border: 1px solid var(--border-color);
+            padding: 24px 20px; border-radius: 10px; text-align: center; box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+        }
+        .about-card:hover { transform: translateY(-4px); border-color: var(--gold-accent); box-shadow: var(--shadow-hover); }
+        .about-icon {
+            width: 55px; height: 55px; margin: 0 auto 15px; background: var(--navy-blue);
+            color: var(--gold-accent); border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 1.3rem; border: 2px solid var(--gold-accent);
+        }
+        .about-card h3 { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--navy-blue); margin-bottom: 8px; font-weight: 700; }
+        .about-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ==========================================
+           7. COMPREHENSIVE COURSES
+           ========================================== */
+        .courses-section { padding: 50px 4vw; background: var(--bg-light); border-top: 1px solid var(--border-color); }
+        .courses-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto;
+        }
+        .course-card {
+            background: #ffffff; border: 1px solid var(--border-color); border-top: 4px solid var(--navy-blue);
+            border-radius: 10px; padding: 22px; box-shadow: var(--shadow-sm); transition: 0.3s;
+        }
+        .course-card:hover {
+            transform: translateY(-5px); border-top-color: var(--gold-accent); box-shadow: var(--shadow-hover);
+        }
+        .course-card h3 {
+            font-family: 'Cinzel', serif; font-size: 1.25rem; color: var(--navy-blue);
+            margin-bottom: 12px; border-bottom: 1px dashed var(--gold-accent); padding-bottom: 8px; font-weight: 700;
+        }
+        .course-details { list-style: none; }
+        .course-details li {
+            font-size: 0.83rem; color: var(--text-dark); margin-bottom: 8px;
+            padding-left: 22px; position: relative; line-height: 1.4;
+        }
+        .course-details li::before {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; left: 0; top: 1px; color: var(--gold-accent); font-size: 0.8rem;
+        }
+
+        /* ==========================================
+           8. SPECIAL BATCHES & TIMINGS TABLE
+           ========================================== */
+        .special-section { padding: 50px 4vw; background: var(--gold-light); border-top: 1px solid var(--border-color); }
+        .special-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto 40px;
+        }
+        .special-card {
+            background: #ffffff; border-radius: 10px; padding: 22px; border-left: 4px solid var(--gold-accent);
+            box-shadow: var(--shadow-sm); position: relative;
+        }
+        .badge-tag {
+            position: absolute; top: 15px; right: 15px; background: var(--navy-blue); color: #fff;
+            font-size: 0.65rem; padding: 3px 8px; border-radius: 12px; font-weight: 600; text-transform: uppercase;
+        }
+        .special-card h4 { font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--navy-blue); margin-bottom: 10px; font-weight: 700; }
+        .special-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+
+        .schedule-box {
+            max-width: 1000px; margin: 0 auto; background: #ffffff; border-radius: 10px;
+            padding: 25px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+        }
+        .schedule-box h3 { font-family: 'Cinzel', serif; color: var(--navy-blue); font-size: 1.2rem; margin-bottom: 15px; text-align: center; }
+        .table-responsive { overflow-x: auto; }
+        .schedule-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+        .schedule-table th, .schedule-table td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); }
+        .schedule-table th { background: var(--navy-blue); color: #ffffff; font-family: 'Cinzel', serif; }
+        .schedule-table tr:hover { background: var(--bg-light); }
+
+        /* ==========================================
+           9. FACULTY SECTION
+           ========================================== */
+        .teachers-section { padding: 50px 4vw; background: #ffffff; }
+        .teachers-grid {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto;
+        }
+        .teacher-card {
+            background: var(--bg-light); width: 220px; text-align: center; padding: 25px 15px;
+            border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
+        }
+        .t-img-box {
+            width: 90px; height: 90px; margin: 0 auto 15px; border-radius: 50%;
+            padding: 3px; border: 2px solid var(--navy-blue); background: #fff;
+        }
+        .t-img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .teacher-card h3 { font-family: 'Cinzel', serif; color: var(--navy-blue); font-size: 1.05rem; margin-bottom: 4px; font-weight: 700; }
+        .teacher-sub { color: var(--gold-accent); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; }
+        .teacher-exp { display: inline-block; background: var(--navy-blue); color: #fff; padding: 4px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: 500; }
+
+        /* ==========================================
+           10. SELECTION HIGHLIGHTS (RANKERS)
+           ========================================== */
+        .fame-section { padding: 50px 4vw; background: var(--bg-light); }
+        .fame-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .student-box {
+            background: #ffffff; border-radius: 10px; overflow: hidden;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);
+            text-align: center; display: flex; flex-direction: column; transition: 0.3s;
+        }
+        .student-box:hover { transform: translateY(-4px); border-color: var(--gold-accent); box-shadow: var(--shadow-hover); }
+        .student-img-container {
+            width: 100%; height: 220px; overflow: hidden; position: relative; background: #e2e8f0;
+        }
+        .student-img-container img {
+            width: 100%; height: 100%; object-fit: cover; object-position: top center;
+        }
+        .student-info { padding: 12px; border-top: 3px solid var(--gold-accent); flex-grow: 1; }
+        .student-info h4 { font-family: 'Cinzel', serif; color: var(--navy-blue); font-size: 1rem; margin-bottom: 2px; font-weight: 700; }
+        .student-post { color: #d32f2f; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+
+        /* ==========================================
+           11. REVIEWS
+           ========================================== */
+        .reviews-section { padding: 50px 4vw; background: #ffffff; }
+        .slider-wrapper {
+            position: relative; max-width: 1200px; margin: 0 auto; display: flex; align-items: center;
+        }
+        .reviews-container {
+            display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 20px; padding: 10px 5px;
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .reviews-container::-webkit-scrollbar { display: none; }
+        
+        .review-card {
+            min-width: 270px; max-width: 300px; flex: 0 0 auto;
+            background: var(--bg-light); padding: 22px 18px; border-radius: 10px;
+            box-shadow: var(--shadow-sm); border-left: 4px solid var(--gold-accent);
+        }
+        .stars { color: var(--gold-accent); margin-bottom: 10px; font-size: 0.85rem; }
+        .review-text { font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+        .reviewer { font-weight: 700; color: var(--navy-blue); font-family: 'Cinzel', serif; font-size: 0.88rem; }
+        
+        .slider-btn {
+            background: var(--navy-blue); color: #ffffff; border: none; width: 38px; height: 38px;
+            border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 10;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: 0.3s; flex-shrink: 0;
+        }
+        .slider-btn:hover { background: var(--gold-accent); color: var(--navy-blue); }
+
+        /* ==========================================
+           12. FREQUENTLY ASKED QUESTIONS (FAQ)
+           ========================================== */
+        .faq-section { padding: 50px 4vw; background: var(--bg-light); border-top: 1px solid var(--border-color); }
+        .faq-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+        .faq-item {
+            background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .faq-question {
+            padding: 16px 20px; font-weight: 600; color: var(--navy-blue); font-size: 0.9rem;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            user-select: none; transition: 0.2s;
+        }
+        .faq-question:hover { background: var(--gold-light); }
+        .faq-answer {
+            padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; border-top: 0px solid transparent;
+        }
+        .faq-item.active .faq-answer { padding: 15px 20px; max-height: 200px; border-top-color: var(--border-color); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-icon { transition: 0.3s; color: var(--gold-accent); }
+
+        /* ==========================================
+           13. ADMISSION & INQUIRY FORM
+           ========================================== */
+        .inquiry-section {
+            padding: 50px 4vw; background: var(--navy-blue); color: #ffffff;
+            border-top: 4px solid var(--gold-accent);
+        }
+        .inquiry-container {
+            max-width: 750px; margin: 0 auto; background: rgba(255,255,255,0.05);
+            padding: 30px; border-radius: 12px; border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-group label { font-size: 0.8rem; color: var(--gold-accent); font-weight: 600; text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 10px 12px; background: #ffffff; border: 1px solid var(--border-color);
+            border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-family: 'Poppins', sans-serif;
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .submit-btn {
+            background: var(--gold-accent); color: var(--navy-blue); font-weight: 700;
+            padding: 12px; border: none; border-radius: 6px; cursor: pointer; width: 100%;
+            text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; margin-top: 10px;
+        }
+        .submit-btn:hover { background: #fff; }
+
+        /* Floating CTA Button */
+        .floating-cta {
+            position: fixed; bottom: 25px; right: 25px; z-index: 999;
+            background: #25d366; color: #ffffff; width: 52px; height: 52px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); text-decoration: none;
+            transition: 0.3s;
+        }
+        .floating-cta:hover { transform: scale(1.1); }
+
+        /* ==========================================
+           14. FOOTER & CONTACT
+           ========================================== */
+        .footer-section {
+            background: #060f1d; color: #ffffff; padding: 40px 4vw 20px;
+        }
+        .footer-grid {
+            display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px; margin-bottom: 30px; max-width: 1100px; margin-left: auto; margin-right: auto;
+        }
+        .contact-box { text-align: center; flex: 1; min-width: 160px; }
+        .contact-icon {
+            width: 45px; height: 45px; margin: 0 auto 10px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--gold-accent); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.1rem; color: var(--gold-accent);
+        }
+        .contact-box h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; margin-bottom: 4px; color: #ffffff; font-weight: 700; }
+        .contact-box p { color: #cbd5e1; font-size: 0.8rem; line-height: 1.4; }
+        
+        .footer-bottom {
+            text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+        }
+        .footer-logo { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold-accent); display: block; }
+        .footer-bottom p { font-size: 0.8rem; color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.8rem; }
+            .hero-subtitle { font-size: 1.8rem; }
+            .hindi-motto { font-size: 1.05rem; }
+            .section-header h2 { font-size: 1.4rem; }
+            .slider-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="loader-logo-box">
+            <img src="https://kommodo.ai/i/7ZLZ0YJyjBskMKvgUn2j" alt="Selection Darpan Logo">
+        </div>
+        <div class="loader-text">SELECTION DARPAN</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#home" class="nav-brand">
+            <div class="nav-logo-container">
+                <img src="https://kommodo.ai/i/7ZLZ0YJyjBskMKvgUn2j" alt="Selection Darpan Logo">
+            </div>
+            <div class="nav-logo-text">SELECTION DARPAN</div>
+        </a>
+        <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#courses">Courses</a>
+            <a href="#special">Batches</a>
+            <a href="#teachers">Faculty</a>
+            <a href="#selections">Highlights</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#faq">FAQs</a>
+            <a href="#inquiry" class="nav-cta-btn">Admission Open</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero reveal" id="home">
+        <div class="hero-logo-badge">
+            <img src="https://kommodo.ai/i/7ZLZ0YJyjBskMKvgUn2j" alt="Selection Darpan Badge">
+        </div>
+        <div class="hindi-motto">"सपनों की कोई कीमत नहीं होती"</div>
+        <h1 class="hero-title">SELECTION DARPAN</h1>
+        <div class="hero-subtitle">Your Dreams • Our Guidance</div>
+        <p class="hero-desc">
+            Hisar's premier competitive exam coaching institute. Specializing in SSC CGL, CHSL, MTS, HSSC CET, Haryana Police, Railway RRB, and Delhi Police examinations through structured curriculum, daily OMR/CBT practice, and expert teacher mentorship.
+        </p>
+        <div class="hero-actions">
+            <a href="#courses" class="btn-primary">View All Courses</a>
+            <a href="#inquiry" class="btn-secondary">Get Free Counseling</a>
+        </div>
+
+        <div class="stats-strip">
+            <div class="stat-item">
+                <div class="stat-number">1500+</div>
+                <div class="stat-label">Final Selections</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">14+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Doubt Clearance</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Weekly Tests / Yr</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & FACILITIES SECTION -->
+    <section class="about-section" id="about">
+        <div class="section-header reveal">
+            <h2>Why Choose Selection Darpan</h2>
+            <p>Our key differentiators for guaranteed growth</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <h3>Expert Faculty Team</h3>
+                <p>Guided directly by Sandeep Sir, Dr. Vinod Sir, and Senior Faculties with over 12+ years of expertise in competitive patterns.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <h3>CBT & Offline Mock Series</h3>
+                <p>Computer Based Tests matching latest SSC/HSSC CBT exam interfaces along with weekly offline OMR evaluations.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+                <h3>Updated Material & Notes</h3>
+                <p>Exclusive printed books, daily practice worksheets (DPPs), short-trick math manuals, and Haryana G.K. capsules.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fa-solid fa-user-graduate"></i></div>
+                <h3>Daily Doubt Desk</h3>
+                <p>Individual teacher interactions after regular classes to resolve student queries step-by-step.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL DETAIL COURSES SECTION -->
+    <section class="courses-section" id="courses">
+        <div class="section-header reveal">
+            <h2>Regular Courses</h2>
+            <p>Comprehensive long-term preparation programs</p>
+        </div>
+        <div class="courses-grid">
+            <div class="course-card reveal">
+                <h3>SSC CGL (Tier 1 + Tier 2)</h3>
+                <ul class="course-details">
+                    <li>Basic-to-advanced syllabus coverage for Tier 1 & Mains.</li>
+                    <li>Daily conceptual math & short-trick calculation drills.</li>
+                    <li>Advanced English Grammar & Vocab root-word modules.</li>
+                    <li>Weekly computer-based mock testing (CBT).</li>
+                    <li>Current Affairs & Static GK daily capsules.</li>
+                    <li>One-to-one individual doubt resolution desks.</li>
+                    <li>Previous 10 Years Question Bank practice sessions.</li>
+                </ul>
+            </div>
+
+            <div class="course-card reveal">
+                <h3>SSC CHSL & MTS</h3>
+                <ul class="course-details">
+                    <li>Focused Foundation for 10+2 & 10th level exams.</li>
+                    <li>Speed enhancement & short calculation techniques.</li>
+                    <li>Comprehensive English exception rules and idioms.</li>
+                    <li>Topic-wise printed assignment books.</li>
+                    <li>Regular offline OMR test series & rank publication.</li>
+                    <li>Descriptive paper & typing test guidance.</li>
+                    <li>Personalized performance analysis after every mock.</li>
+                </ul>
+            </div>
+
+            <div class="course-card reveal">
+                <h3>Delhi Police & SSC GD</h3>
+                <ul class="course-details">
+                    <li>Exam-oriented syllabus tailored for Central Police Forces.</li>
+                    <li>Special Computer Knowledge & Awareness modules.</li>
+                    <li>General Science & Elementary Law coverage.</li>
+                    <li>Daily practice worksheets with target deadlines.</li>
+                    <li>Time management & accuracy improvement.</li>
+                    <li>Logical Reasoning shortcuts mastery.</li>
+                    <li>Complete guidance strategy for PET physical tests.</li>
+                </ul>
+            </div>
+
+            <div class="course-card reveal">
+                <h3>HSSC & Haryana Police</h3>
+                <ul class="course-details">
+                    <li>Exclusive Haryana G.K. lectures by Dr. Vinod Sir.</li>
+                    <li>Haryana CET Mains & Group-D focused preparation.</li>
+                    <li>State Welfare Schemes, Agriculture & Current Affairs.</li>
+                    <li>Maths & Reasoning strictly aligned to NTA/HSSC pattern.</li>
+                    <li>Hindi & English core grammar coverage.</li>
+                    <li>Offline daily doubt desk availability.</li>
+                    <li>Exclusive Haryana G.K. fast-track revision notes.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIAL BATCHES & SCHEDULE TABLE -->
+    <section class="special-section" id="special">
+        <div class="section-header reveal">
+            <h2>Special Target Batches</h2>
+            <p>High-intensity short-term programs</p>
+        </div>
+        <div class="special-grid">
+            <div class="special-card reveal">
+                <span class="badge-tag">High Priority</span>
+                <h4>Maths & Reasoning Special</h4>
+                <p>Designed for candidates seeking 100% score accuracy in calculations. Special shortcut methods curated by Sandeep Sir & Ravinder Sir.</p>
+                <div style="font-weight: 600; font-size: 0.8rem; color: var(--navy-blue);"><i class="fa-regular fa-clock"></i> Duration: 3 Months Intensive</div>
+            </div>
+
+            <div class="special-card reveal">
+                <span class="badge-tag">Exclusive</span>
+                <h4>Haryana GK Masterclass</h4>
+                <p>Complete State History, Geography, Culture, and Politics taught exclusively by Dr. Vinod Sir (International Education Awardee).</p>
+                <div style="font-weight: 600; font-size: 0.8rem; color: var(--navy-blue);"><i class="fa-regular fa-clock"></i> Duration: 45 Days Target</div>
+            </div>
+
+            <div class="special-card reveal">
+                <span class="badge-tag">Booster</span>
+                <h4>Speed Test & Revision Batch</h4>
+                <p>Daily 100-Question full length Mock Tests followed by detailed teacher analysis and quick trick discussions.</p>
+                <div style="font-weight: 600; font-size: 0.8rem; color: var(--navy-blue);"><i class="fa-regular fa-clock"></i> Duration: Daily 2 Hours</div>
+            </div>
+
+            <div class="special-card reveal">
+                <span class="badge-tag">Special</span>
+                <h4>English Vocab & Reading Class</h4>
+                <p>Root word strategy, daily editorial reading, 2000+ idioms and synonyms coverage for SSC CGL Mains candidates.</p>
+                <div style="font-weight: 600; font-size: 0.8rem; color: var(--navy-blue);"><i class="fa-regular fa-clock"></i> Duration: 60 Days Special</div>
+            </div>
+        </div>
+
+        <!-- BATCH TIMINGS TABLE -->
+        <div class="schedule-box reveal">
+            <h3>Current Batch Timings (Offline Classroom)</h3>
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Batch Name</th>
+                            <th>Target Exam</th>
+                            <th>Timings</th>
+                            <th>Mode</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Morning Super Batch</strong></td>
+                            <td>SSC CGL / CHSL 2026</td>
+                            <td>09:00 AM - 01:00 PM</td>
+                            <td>Classroom + Test</td>
+                            <td><span style="color: green; font-weight: 600;">Seats Open</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>HSSC Special CET</strong></td>
+                            <td>Haryana Police & CET</td>
+                            <td>10:00 AM - 02:00 PM</td>
+                            <td>Offline Classroom</td>
+                            <td><span style="color: green; font-weight: 600;">Seats Open</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Afternoon Target Batch</strong></td>
+                            <td>Delhi Police / SSC GD</td>
+                            <td>01:30 PM - 04:30 PM</td>
+                            <td>Classroom + DPP</td>
+                            <td><span style="color: #d4af37; font-weight: 600;">Filling Fast</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maths & Reasoning Booster</strong></td>
+                            <td>All Competitive Exams</td>
+                            <td>04:30 PM - 06:30 PM</td>
+                            <td>Special Shortcut Class</td>
+                            <td><span style="color: green; font-weight: 600;">New Batch</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACULTY SECTION -->
+    <section class="teachers-section" id="teachers">
+        <div class="section-header reveal">
+            <h2>Our Expert Faculty</h2>
+            <p>Experienced & Result-Oriented Mentors</p>
+        </div>
+        <div class="teachers-grid">
+            <div class="teacher-card reveal">
+                <div class="t-img-box"><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=150&q=80" alt="Sandeep Sir"></div>
+                <h3>Sandeep Deswal</h3>
+                <div class="teacher-sub">Maths Expert</div>
+                <div class="teacher-exp">14+ Yrs Exp</div>
+            </div>
+            <div class="teacher-card reveal">
+                <div class="t-img-box"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&q=80" alt="Dr. Vinod Sir"></div>
+                <h3>Dr. Vinod Sir</h3>
+                <div class="teacher-sub">Haryana G.K.</div>
+                <div class="teacher-exp">12+ Yrs Exp</div>
+            </div>
+            <div class="teacher-card reveal">
+                <div class="t-img-box"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80" alt="Sumit Sir"></div>
+                <h3>Sumit Bherwal</h3>
+                <div class="teacher-sub">English Faculty</div>
+                <div class="teacher-exp">11+ Yrs Exp</div>
+            </div>
+            <div class="teacher-card reveal">
+                <div class="t-img-box"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80" alt="Ravinder Sir"></div>
+                <h3>Ravinder Sir</h3>
+                <div class="teacher-sub">Reasoning Expert</div>
+                <div class="teacher-exp">13+ Yrs Exp</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SELECTION HIGHLIGHTS (RANKERS) -->
+    <section class="fame-section" id="selections">
+        <div class="section-header reveal">
+            <h2>Selection Highlights</h2>
+            <p>Our Top Rankers & Achievers</p>
+        </div>
+        
+        <div class="fame-grid">
+            <div class="student-box reveal">
+                <div class="student-img-container">
+                    <img src="https://kommodo.ai/i/miqXTlFMyHtip5HosMF7" alt="Garvit - Excise Inspector">
+                </div>
+                <div class="student-info">
+                    <h4>Garvit</h4>
+                    <div class="student-post">Excise Inspector</div>
+                </div>
+            </div>
+
+            <div class="student-box reveal">
+                <div class="student-img-container">
+                    <img src="https://kommodo.ai/i/Vn1a3GwtNaa15KNa4fdS" alt="Vishal Rathi - Custom Inspector">
+                </div>
+                <div class="student-info">
+                    <h4>Vishal Rathi</h4>
+                    <div class="student-post">Custom Inspector</div>
+                </div>
+            </div>
+
+            <div class="student-box reveal">
+                <div class="student-img-container">
+                    <img src="https://kommodo.ai/i/miqXTlFMyHtip5HosMF7" alt="Takdeer Hooda - ASO">
+                </div>
+                <div class="student-info">
+                    <h4>Takdeer Hooda</h4>
+                    <div class="student-post">ASO (Ministry of Defence)</div>
+                </div>
+            </div>
+
+            <div class="student-box reveal">
+                <div class="student-img-container">
+                    <img src="https://kommodo.ai/i/Vn1a3GwtNaa15KNa4fdS" alt="Vishesh Grewal - JSA">
+                </div>
+                <div class="student-info">
+                    <h4>Vishesh Grewal</h4>
+                    <div class="student-post">JSA (Ministry of Defence)</div>
+                </div>
+            </div>
+
+            <div class="student-box reveal">
+                <div class="student-img-container">
+                    <img src="https://kommodo.ai/i/miqXTlFMyHtip5HosMF7" alt="Yogesh Dhankhar - Haryana Police">
+                </div>
+                <div class="student-info">
+                    <h4>Yogesh Dhankhar</h4>
+                    <div class="student-post">Haryana Police</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SCROLLING SYSTEM -->
+    <section class="reviews-section reveal" id="reviews">
+        <div class="section-header">
+            <h2>Student Feedback</h2>
+            <p>Real stories from our successful candidates</p>
+        </div>
+        
+        <div class="slider-wrapper">
+            <button class="slider-btn" id="prevBtn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            
+            <div class="reviews-container" id="reviewSlider">
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Sandeep Sir's math shortcuts saved crucial time during my CGL exam. Selection Darpan is undoubtedly the finest coaching center in Hisar."</p>
+                    <div class="reviewer">- Ankit J.</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Disciplined atmosphere and focus on test series. The daily doubt clearance desk helped me secure my dream post."</p>
+                    <div class="reviewer">- Garvit</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Dr. Vinod Sir's Haryana GK notes are comprehensive. Almost 95% of state exam questions came directly from his lectures."</p>
+                    <div class="reviewer">- Yogesh D.</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Great faculty for English and Reasoning as well. The mock CBT tests helped remove my exam fear completely."</p>
+                    <div class="reviewer">- Meenakshi</div>
+                </div>
+            </div>
+            
+            <button class="slider-btn" id="nextBtn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section class="faq-section" id="faq">
+        <div class="section-header reveal">
+            <h2>Frequently Asked Questions</h2>
+            <p>Get quick answers to common queries</p>
+        </div>
+        <div class="faq-container reveal">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What are the class timings at Selection Darpan Hisar?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    We offer multiple morning, afternoon, and evening batches starting from 8:00 AM to 6:30 PM. Contact our desk for specific batch availability.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Are demo classes available before taking admission?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, we offer 2 days of free trial demo classes for new students to experience our teaching methodology firsthand.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you provide study materials and mock test series?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, complete printed assignment books, daily practice sheets (DPPs), and weekly CBT / OMR mock test series are included in the course fee.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How are student doubt queries handled?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    We run dedicated daily Doubt Desks where faculties are personally available after regular lectures for one-on-one student discussions.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMISSION & INQUIRY FORM SECTION -->
+    <section class="inquiry-section" id="inquiry">
+        <div class="section-header reveal" style="margin-bottom: 20px;">
+            <h2 style="color: #ffffff;">Quick Inquiry / Registration</h2>
+            <p style="color: var(--gold-accent);">Begin your preparation journey today</p>
+        </div>
+        <div class="inquiry-container reveal">
+            <form onsubmit="event.preventDefault(); alert('Thank you for reaching out to Selection Darpan! Our team will contact you shortly.');">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter mobile number" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="targetExam">Target Exam</label>
+                        <select id="targetExam" required>
+                            <option value="">Select Target Exam</option>
+                            <option value="SSC CGL">SSC CGL (Tier 1 + 2)</option>
+                            <option value="SSC CHSL/MTS">SSC CHSL / MTS</option>
+                            <option value="Delhi Police/GD">Delhi Police & SSC GD</option>
+                            <option value="HSSC/Haryana Police">HSSC & Haryana Police / CET</option>
+                            <option value="Maths Special">Maths & Reasoning Special</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mode">Batch Mode</label>
+                        <select id="mode" required>
+                            <option value="Offline Hisar">Offline Classroom (Hisar)</option>
+                            <option value="Special Crash Course">Special Crash Course</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="message">Your Query / Message (Optional)</label>
+                    <textarea id="message" placeholder="Ask about fee structure, hostel guidance, or batch timing..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FLOATING WHATSAPP CTA -->
+    <a href="https://wa.me/919812000000?text=Hello%20Selection%20Darpan%20Hisar%2C%20I%20want%20information%20regarding%20courses." class="floating-cta" target="_blank" aria-label="WhatsApp Us">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer class="footer-section" id="contact">
+        <div class="footer-grid reveal">
+            <div class="contact-box">
+                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <h4>Address</h4>
+                <p>SCO No. 3, Red Square Market<br>Hisar, Haryana - 125001</p>
+            </div>
+            <div class="contact-box">
+                <div class="contact-icon"><i class="fa-brands fa-instagram"></i></div>
+                <h4>Instagram</h4>
+                <p>@selectiondarpan_hisar</p>
+            </div>
+            <div class="contact-box">
+                <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
+                <h4>Telegram</h4>
+                <p>Selection Darpan Hisar</p>
+            </div>
+            <div class="contact-box">
+                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                <h4>Contact Desk</h4>
+                <p>+91 98120-XXXXX<br>+91 94160-XXXXX</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span class="footer-logo">Selection Darpan</span>
+            <p>"सपनों की कोई कीमत नहीं होती"</p>
+            <p style="margin-top: 10px;">&copy; 2026 Selection Darpan Hisar. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS SCRIPTS -->
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('preloader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', () => navLinks.classList.remove('active')));
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        reveals.forEach(r => observer.observe(r));
+
+        // Side Scroll Review Slider
+        const slider = document.getElementById('reviewSlider');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
+        const scrollAmount = 300;
+
+        next.addEventListener('click', () => slider.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+        prev.addEventListener('click', () => slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+
+        // Accordion FAQ toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                faqItems.forEach(other => { if (other !== item) other.classList.remove('active'); });
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
